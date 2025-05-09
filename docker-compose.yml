@@ -1,0 +1,29 @@
+
+version: "3.8"
+services:
+  app:
+    build: .
+    ports:
+      - "8503:8501"
+    environment:
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+      OLLAMA_BASE_URL: http://10.100.21.22:11434
+      OPENSEARCH_URL: http://opensearch-node:9200
+      OPENSEARCH_INDEX: chatbot_faq_index
+    depends_on:
+      - opensearch-node
+    volumes:
+      - ./data:/app/data
+
+  opensearch-node:
+    image: opensearchproject/opensearch:2.11.1
+    environment:
+      - discovery.type=single-node
+      - plugins.security.disabled=true
+    ports:
+      - "9200:9200"
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+
+volumes:
+  opensearch-data:
