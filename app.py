@@ -21,7 +21,7 @@ def load_data_and_create_vectorstore():
 
 def create_qa_chain(vectorstore, model_choice: str = "gemini"):
     if model_choice == "gemini":
-        llm = GoogleGenerativeAI(model="models/gemini-1.5-flash", google_api_key=GOOGLE_API_KEY)
+        llm = GoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=GOOGLE_API_KEY)
     elif model_choice == "ollama":
         llm = Ollama(base_url=OLLAMA_BASE_URL, model=OLLAMA_MODEL_NAME)
     else:
@@ -38,7 +38,7 @@ def main():
     vectorstore = load_data_and_create_vectorstore()
     model_choice = st.selectbox("Choose a model:", ("gemini", "ollama"))
     qa_chain = create_qa_chain(vectorstore, model_choice)
-    query = st.text_input("Ask a question:")
+    query = st.text_input("menanyakan sebuah pertanyaan :")
     if query:
         with st.spinner("Thinking..."):
             result = qa_chain.invoke({"query": query})
