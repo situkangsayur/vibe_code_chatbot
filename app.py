@@ -38,10 +38,11 @@ def main():
     vectorstore = load_data_and_create_vectorstore()
     model_choice = st.selectbox("Choose a model:", ("gemini", "ollama"))
     qa_chain = create_qa_chain(vectorstore, model_choice)
-    query = st.text_input("menanyakan sebuah pertanyaan :")
+    query = st.text_input("Menanyakan sebuah pertanyaan : ")
+    prompt = f"Jawablah pertanyaan ini dalam bahasa Indonesia: {query}"
     if query:
         with st.spinner("Thinking..."):
-            result = qa_chain.invoke({"query": query})
+            result = qa_chain.invoke({"query": prompt})
             st.write("Answer:", result["result"])
             with st.expander("Source Documents"):
                 for doc in result["source_documents"]:
