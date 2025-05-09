@@ -8,6 +8,7 @@ services:
     environment:
       GOOGLE_API_KEY: ${GOOGLE_API_KEY}
       OLLAMA_BASE_URL: http://10.100.21.22:11434
+      OLLAMA_MODEL_NAME: deepseek-r1:8b
       OPENSEARCH_URL: http://opensearch-node:9200
       OPENSEARCH_INDEX: chatbot_faq_index
     depends_on:
