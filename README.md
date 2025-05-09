@@ -32,13 +32,13 @@ Proses kerja utama mengikuti pendekatan RAG sebagai berikut:
 
 ```mermaid
 graph TD
-  A[PDF File Input] --> B[Extract Text (pdfminer)]
-  B --> C[Chunk Text (LangChain Splitter)]
-  C --> D[Embed with Google AI (embedding-001)]
+  A[PDF File Input] --> B[Extract Text - pdfminer]
+  B --> C[Chunk Text - LangChain Splitter]
+  C --> D[Embedding - Google GenAI]
   D --> E[Index to OpenSearch]
 
   F[User Question] --> G[Retrieve Relevant Chunks]
-  G --> H[LLM Inference (Gemini/Ollama)]
+  G --> H[LLM Inference - Gemini/Ollama]
   H --> I[Final Answer]
   I --> J[Streamlit UI Output]
 ```
