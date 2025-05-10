@@ -1,6 +1,7 @@
 streamlit
 langchain
 langchain-community
+langchain-ollama
 langchain-google-genai
 langchain-core
 pdfminer.six

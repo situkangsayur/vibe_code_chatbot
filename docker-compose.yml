@@ -4,12 +4,14 @@ services:
   app:
     dns:
       - 8.8.8.8
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     build: .
     ports:
       - "8503:8501"
     environment:
       GOOGLE_API_KEY: ${GOOGLE_API_KEY}
-      OLLAMA_BASE_URL: http://10.100.21.22:11434
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL}
       OLLAMA_MODEL_NAME: ${OLLAMA_MODEL_NAME} 
       OPENSEARCH_URL: http://opensearch-node:9200
       OPENSEARCH_INDEX: chatbot_faq_index

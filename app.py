@@ -2,7 +2,7 @@
 import streamlit as st
 from langchain.chains import RetrievalQA
 from langchain_google_genai import GoogleGenerativeAI
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaLLM
 from langchain_community.vectorstores import OpenSearchVectorSearch
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.schema import Document
@@ -21,9 +21,9 @@ def load_data_and_create_vectorstore():
 
 def create_qa_chain(vectorstore, model_choice: str = "gemini"):
     if model_choice == "gemini":
-        llm = GoogleGenerativeAI(model="model/gemini-2.0-flash", google_api_key=GOOGLE_API_KEY)
+        llm = GoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=GOOGLE_API_KEY)
     elif model_choice == "ollama":
-        llm = Ollama(base_url=OLLAMA_BASE_URL, model=OLLAMA_MODEL_NAME)
+        llm = OllamaLLM(base_url=OLLAMA_BASE_URL, model=OLLAMA_MODEL_NAME)
     else:
         raise ValueError("Invalid model")
     return RetrievalQA.from_chain_type(
