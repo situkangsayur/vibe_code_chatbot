@@ -23,6 +23,7 @@ def create_qa_chain(vectorstore, model_choice: str = "gemini"):
     if model_choice == "gemini":
         llm = GoogleGenerativeAI(model="gemini-2.0-flash", google_api_key=GOOGLE_API_KEY)
     elif model_choice == "ollama":
+        print(OLLAMA_MODEL_NAME)
         llm = OllamaLLM(base_url=OLLAMA_BASE_URL, model=OLLAMA_MODEL_NAME)
     else:
         raise ValueError("Invalid model")
